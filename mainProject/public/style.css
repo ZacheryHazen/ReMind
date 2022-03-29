@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600&display=swap');
+
+.reMindNavbar
+{
+    background-color: #25364B;
+    color: rgb(146, 146, 146);
+}
+.reMindToDo
+{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+}
+.reMindHeader
+{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+}
+.reMindInteractable
+{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+}
+
+.remindNavLink
+{
+    color: rgb(168, 168, 168);
+}
+
+.reMindActiveNavLink
+{
+    color: rgb(129, 129, 129);
+}
