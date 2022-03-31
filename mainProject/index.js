@@ -6,18 +6,13 @@ const port = 3000;
 app.use(express.static(path.join(__dirname,'public')));
 
 
-/*
-const evtSource = new EventSource("http://192.168.1.8:3000");
-evtSource.onmessage = function (message) {
-    console.log("we got something ", message);
-};
-*/
+
 app.listen(port, () => {
-    console.log('howdy');
+    console.log('Running server');
 })
 app.get('/', (req, res) => {
-    res.render('index.ejs');
+    res.render('signin.ejs');
 })
-app.get('/takeMeToChurch', (req, res) => {
-    res.render('church.ejs');
+app.get('/home', (req, res) => {
+    res.render('index.ejs');
 })

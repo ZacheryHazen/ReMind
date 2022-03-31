@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Work+Sans:wght@300;400;600&display=swap');
 
 .reMindNavbar
 {
     background-color: #25364B;
+}
+.reMindBrand
+{
+    font-family: 'Pacifico', cursive;
     color: rgb(146, 146, 146);
 }
 .reMindToDo
@@ -29,4 +33,51 @@
 .reMindActiveNavLink
 {
     color: rgb(129, 129, 129);
+}
+
+.signInContainer{
+    height: 100vh;
+}
+
+.signInImageContainer
+{
+    --bs-gutter-x: 0;
+    height: 100vh;
+}
+
+.signInBody
+{
+    background-color: #25364b;
+}
+
+.formLabels
+{
+    color: rgb(168,168,168);
+}
+
+.buttonContainer
+{
+    display: flex;
+    justify-content: center;
+}
+
+.signInNav
+{
+    height:35vh;
+    padding-top:0.5rem;
+}
+
+#signInButton
+{
+    width: 100%;
+    background-color: #A63D31;
+    border-color: #922F2B;
+}
+
+@media (max-width: 991.98px)
+{
+    .signInImageContainer
+    {
+        display: none;
+    }
 }
