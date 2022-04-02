@@ -2,32 +2,86 @@
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="/style.css">
+        <link rel="icon" href="icon.png">
+        
         <title>Re-Mind - Home</title>
     </head>
-    <body>
-        <nav class="navbar navbar-expand-lg ps-4 reMindNavbar reMindHeader">
-            <div class="navbar-brand reMindBrand">Re-Mind</div>
-            <div class="navbar-nav reMindInteractable">
-                <a class="nav-link reMindActiveNavLink" href="/">Home</a>
-                <a class="nav-link remindNavLink" href="/">Lists</a>
-                <a class="nav-link remindNavLink" href="/">Reminders</a>
-                
+    <body class="reMindPage">
+        <%- include('partials/navbar') %>
+        <div class="container-xxl container-fluid remindBodyText">
+            <div class="row justify-content-center">
+                <div class="col-12 mt-2 mb-1">
+                    <h3 class="homePageAndListHeader"><a href="/lists" class="reMindLinks">Lists</a></h3>
+                </div>
+                <div class="row justify-content-center">
+                    <% if (Object.keys(lists).length > 0) { %>
+                        <% for (let listCounter = 0; listCounter < 6 && listCounter < Object.keys(lists).length; listCounter++) { %>
+                            <% if (listCounter == 0 || listCounter == 3) { %>
+                                <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
+                            <% } else { %>
+                                <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
+                            <% } %>
+                                <a href="/lists/<%-lists[listCounter].id%>" class="tileLink">
+                                    <h4 class="homePageAndListHeader">
+                                        <%= lists[listCounter].name %>
+                                    </h4>
+                                    <ul class="listItemUL">
+                                        <% for (let itemCounter = 0; itemCounter < 10 && itemCounter < lists[listCounter].items.length; itemCounter++) { %>
+                                            <li>
+                                                <%= lists[listCounter].items[itemCounter] %>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+                                    <% if (Object.keys(lists[listCounter].items).length > 10) { %>
+                                        And <%=lists[listCounter].items.length-10%> more item(s) not shown here.
+                                    <% } %>
+                                </a>
+                            </div> 
+                        <% } %>
+                        <% if (Object.keys(lists).length > 6) { %>
+                            <d<piv class="col-3 centerText">
+                                >And <%=Object.keys(lists).length-6%> more list(s) not shown here. Click <a href="/lists" class="reMindLinks">here</a> to see all your lists.</p>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+                <div class="col-12 mb-1">
+                    <h3 class="homePageAndListHeader"><a href="/reminders" class="reMindLinks">Reminders</a></h3>
+                </div>
+                <div class="row justify-content-center">
+                    <% if (Object.keys(reminders).length > 0) { %>
+                        <% for (let reminderCounter = 0; reminderCounter < 6 && reminderCounter < Object.keys(reminders).length; reminderCounter++) { %>
+                            <% if (reminderCounter == 0 || reminderCounter == 3) { %>
+                                <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
+                            <% } else { %>
+                                <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
+                            <% } %>
+                                <a href="/reminders/<%-reminders[reminderCounter].id%>" class="tileLink">
+                                    <h4 class="homePageAndListHeader">
+                                        <%= reminders[reminderCounter].name %>
+                                    </h4>
+                                    <p>
+                                        <%  if (reminders[reminderCounter].description.length < 300) {%> 
+                                            <%= reminders[reminderCounter].description %>
+                                        <% } else {%>
+                                            <%= reminders[reminderCounter].description.substring(0,297) %>...
+                                        <% } %>
+                                    </p>
+                                </a>
+                            </div> 
+                        <% } %>
+                        <% if (Object.keys(reminders).length > 6) { %>
+                            <div class="col-3 centerText">
+                                <p>And <%=Object.keys(reminders).length-6%> more reminder(s) not shown here. Click <a href="/reminders" class="reMindLinks">here</a> to see all your reminders.</p>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+                <div class="col-12">
+                    <h3 class="homePageAndListHeader"><a href="/reviews" class="reMindLinks">Reviews</a></h3>
+                </div>
+                            
             </div>
-        </nav>
-        <div class="container-xxl container-fluid">
-            HELP
-            <div class="row">
-                <% for (let counter = 0; counter < 5; counter++) {%>
-                    
-                    <div class="col">
-                        <%= counter %>me
-                    </div>
-                    
-                <% } %>
-                <h1 class="test">
-                    testHIIIIIIIIIIIIIIIIIIIIIIIII
-                </h1>
-        </div>
         </div>
     </body>
 </html>

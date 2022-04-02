@@ -2,6 +2,7 @@
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="icon.png">
         <title>Re-Mind - Sign In</title>
     </head>
     <body>
@@ -14,53 +15,58 @@
                     <div class="row signInNav">
                         <ul class="nav justify-content-end remindInteractable">
                             <li class="nav-item">
-                                <a class="nav-link remindNavLink">About</a>
+                                <a class="nav-link remindNavLink" href="/about">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link remindNavLink">Contact Us</a>
+                                <a class="nav-link remindNavLink" href="/contactUs">Contact Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link remindNavLink">Support</a>
+                                <a class="nav-link remindNavLink" href="/support">Support</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-2 pt-1">
-                            <label class="formLabels" for="inputUsername"><h5>Username</h5></label>
+                    <form action="/home" method="post">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-2 pt-1">
+                                <label class="formLabels" for="inputUsername"><h5>Username</h5></label>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control" name="inputUsername" id="inputUsername">
+                            </div>
+                            <div class="col-2"></div>
                         </div>
-                        <div class="col-6">
-                            <input type="text" class="form-control" id="inputUsername">
+                        <div class="row">
+                            <div class="col-10 remindSignInForgotInfo">
+                                <a class="formLabels" href="/forgotUsername">Forgot Username?</a>
+                            </div>
                         </div>
-                        <div class="col-2"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-5">
-                            Test
+                        <div class="row mt-4">
+                            <div class="col-2"></div>
+                            <div class="col-2 pt-1">
+                                <label class="formLabels" for="inputPassword"><h5>Password</h5></label>
+                            </div>
+                            <div class="col-6">
+                                <input type="password" class="form-control" name="inputPassword" id="inputPassword">
+                            </div>
+                            <div class="col-2"></div>
                         </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-2"></div>
-                        <div class="col-2 pt-1">
-                            <label class="formLabels" for="inputPassword"><h5>Password</h5></label>
+                        <div class="row">
+                            <div class="col-10 remindSignInForgotInfo">
+                                <a class="formLabels" href="/forgotPassword">Forgot Password?</a>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input type="password" class="form-control" id="inputPassword">
+                        <div class="row mt-4">>
+                            <div class="col-2"></div>
+                            <div class="col-4 pt-2 buttonContainer">
+                                <a href="/createNewAccount" class="formLabels"><h5>Don't have an account?</h5></a>
+                            </div>  
+                            <div class="col-4 formLabels buttonContainer">
+                                <button type="submit" id="signInButton" class="btn formLabels"><h5>Sign In</h5></button>
+                            </div>
+                            <div class="col-2"></div>
                         </div>
-                        <div class="col-2"></div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <div class="row mt-5">>
-                        <div class="col-2"></div>
-                        <div class="col-4 pt-2 buttonContainer">
-                            <a href="/createNewAccount" class="formLabels"><h5>Don't have an account?</h5></a>
-                        </div>  
-                        <div class="col-4 formLabels buttonContainer">
-                            <button type="submit" id="signInButton" class="btn formLabels"><h5>Sign In</h5></button>
-                        </div>
-                        <div class="col-2"></div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
