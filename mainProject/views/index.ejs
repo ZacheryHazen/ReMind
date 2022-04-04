@@ -10,10 +10,19 @@
         <%- include('partials/navbar') %>
         <div class="container-xxl container-fluid remindBodyText">
             <div class="row justify-content-center">
-                <div class="col-12 mt-2 mb-1">
-                    <h3 class="homePageAndListHeader"><a href="/lists" class="reMindLinks">Lists</a></h3>
+                <div class="col-12 mt-2">
+                    <h3 class="homePageAndListHeader mb-0"><a href="/lists" class="reMindLinks">Lists</a></h3>
                 </div>
                 <div class="row justify-content-center">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-3 ms-3">
+                        
+                    </div>
+                    <div class="col-3 alignTextEnd ms-3 me-1 addButton">
+                        <a href="lists/add" class="reMindLinks">+ Add List</a>
+                    </div>
                     <% if (Object.keys(lists).length > 0) { %>
                         <% for (let listCounter = 0; listCounter < 6 && listCounter < Object.keys(lists).length; listCounter++) { %>
                             <% if (listCounter == 0 || listCounter == 3) { %>
@@ -39,16 +48,25 @@
                             </div> 
                         <% } %>
                         <% if (Object.keys(lists).length > 6) { %>
-                            <d<piv class="col-3 centerText">
-                                >And <%=Object.keys(lists).length-6%> more list(s) not shown here. Click <a href="/lists" class="reMindLinks">here</a> to see all your lists.</p>
+                            <div class="col-3 centerText">
+                                And <%=Object.keys(lists).length-6%> more list(s) not shown here. <br />Click <a href="/lists" class="reMindLinks">here</a> to see all your lists.</p>
                             </div>
                         <% } %>
                     <% } %>
                 </div>
-                <div class="col-12 mb-1">
-                    <h3 class="homePageAndListHeader"><a href="/reminders" class="reMindLinks">Reminders</a></h3>
+                <div class="col-12">
+                    <h3 class="homePageAndListHeader mb-0"><a href="/reminders" class="reMindLinks">Reminders</a></h3>
                 </div>
                 <div class="row justify-content-center">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-3 ms-3">
+                        
+                    </div>
+                    <div class="col-3 alignTextEnd ms-3 me-1 addButton">
+                        <a href="lists/reminder" class="reMindLinks">+ Add Reminder</a>
+                    </div>
                     <% if (Object.keys(reminders).length > 0) { %>
                         <% for (let reminderCounter = 0; reminderCounter < 6 && reminderCounter < Object.keys(reminders).length; reminderCounter++) { %>
                             <% if (reminderCounter == 0 || reminderCounter == 3) { %>
@@ -72,7 +90,7 @@
                         <% } %>
                         <% if (Object.keys(reminders).length > 6) { %>
                             <div class="col-3 centerText">
-                                <p>And <%=Object.keys(reminders).length-6%> more reminder(s) not shown here. Click <a href="/reminders" class="reMindLinks">here</a> to see all your reminders.</p>
+                                <p>And <%=Object.keys(reminders).length-6%> more reminder(s) not shown here. <br />Click <a href="/reminders" class="reMindLinks">here</a> to see all your reminders.</p>
                             </div>
                         <% } %>
                     <% } %>
@@ -80,7 +98,6 @@
                 <div class="col-12">
                     <h3 class="homePageAndListHeader"><a href="/reviews" class="reMindLinks">Reviews</a></h3>
                 </div>
-                            
             </div>
         </div>
     </body>

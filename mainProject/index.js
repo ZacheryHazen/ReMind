@@ -2,11 +2,13 @@ const path = require('path');
 const EventSource = require('eventsource');
 const express = require('express');
 const app = express();
+const methodOverride = require('method-override');
 const port = 3000;
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({ extended: true}));
-app.set('view engine', 'ejs');
 
+app.set('view engine', 'ejs');
+app.use(methodOverride('_method'));
 // app.use(express.json());
 
 let lists = [
@@ -82,6 +84,21 @@ let reminders = [
         id: 7,
         name: "Dentist Appointment",
         description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
+    },
+    {
+        id: 8,
+        name: "Dentist Appointment",
+        description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
+    },
+    {
+        id: 9,
+        name: "Dentist Appointment",
+        description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
+    },
+    {
+        id: 10,
+        name: "Dentist Appointment",
+        description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
     }
 ];
 
@@ -95,8 +112,6 @@ app.get('/', (req, res) => {
     res.render('signin.ejs');
 })
 app.get('/home', (req, res) => {
-    console.log(Object.keys(lists).length);
-    console.log(Object.keys(reminders).length);
     res.render('index.ejs', { lists, reminders });
 })
 app.post('/home', (req, res) => {
@@ -106,9 +121,36 @@ app.post('/home', (req, res) => {
 app.get('/lists', (req, res) => {
     res.render('lists.ejs', { lists });
 })
+app.post('/lists', (req, res) => {
+    console.log(req.body);
+    let newId = Object.keys(lists).length + 1;
+    let newName = Object.values(req.body)[0];
+    let newValues = [];
+    for (let counter = 1; counter < Object.values(req.body).length; counter++)
+    {
+        if (Object.values(req.body)[counter] != '')
+        {
+            newValues.push((Object.values(req.body))[counter]);
+        }
+    }
+    lists.push({ id: newId, name: newName, items: newValues});
+    res.render('lists.ejs', { lists });
+})
+app.get('/lists/add', (req, res) => {
+    res.render('addList.ejs');
+})
+app.get('/lists/:id', (req, res) => {
+    let id = req.params.id;
+    let list = lists.find(l => l.id == id);
+    res.render('viewEditList.ejs', { list });
+})
+app.patch('/lists/:id', (req, res) => {
+    console.log(req.body);
+    res.render('lists.ejs', { lists} );
+})
 app.get('/reminders', (req, res) => {
-    res.render('reminders.ejs')
+    res.render('reminders.ejs', { reminders });
 })
 app.get('/reviews', (req, res) => {
-    res.render('reviews.ejs')
+    res.render('reviews.ejs');
 })

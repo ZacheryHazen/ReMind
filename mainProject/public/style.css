@@ -65,9 +65,27 @@
     background-color: #25364b;
 }
 
-.formLabels
+.formLabel
 {
     color: rgb(168,168,168);
+}
+
+.reMindFormTiles
+{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.formListItem
+{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.listItemRow
+{
+    display: flex;
+    flex-direction: row;
 }
 
 .buttonContainer
@@ -82,7 +100,7 @@
     padding-top:0.5rem;
 }
 
-.remindSignInForgotInfo
+.alignTextEnd
 {
     text-align: end;
 }
@@ -113,6 +131,7 @@
 .reMindLinks:hover
 {
     color: rgb(129, 129, 129);
+    background-color: rgb(220, 220, 220);
 }
 
 .centerText 
@@ -136,6 +155,21 @@
     
 }
 
+.addButton
+{
+    padding-right: 0;
+}
+
+.bootstrapIcon
+{
+    font-size: 15pt;
+    align-self: center;
+}
+
+.bootstrapIcon:hover{
+    cursor: pointer;
+}
+
 .parallax {
     /* The image used */
     background-image: url("photo-1536098561742-ca998e48cbcc.avif");
@@ -150,12 +184,60 @@
     background-size: cover;
 }
 
+.addListItemLink
+{
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.addListItemLink:hover
+{
+    cursor: pointer
+}
+
+.redButton
+{
+    background-color: #A63D31;
+    border-color: #922F2B;
+}
+
+.editViewItemRow
+{
+    padding-left: 0;
+    padding-right: 0;
+    align-items: center;
+}
+
+.editViewItemInputReadonly
+{
+    background-color: white!important;
+    border: none;
+}
+
+.editViewItemInputReadonly:hover
+{
+    cursor: default;
+}
+
+.editViewItemInputReadonly:focus
+{
+    outline: none;
+    box-shadow: none;
+}
+
+.finishIcon
+{
+    font-size: 19pt;
+}
 
 #signInButton
 {
     width: 100%;
-    background-color: #A63D31;
-    border-color: #922F2B;
+}
+
+#addListButton
+{
+    width: 15%;
 }
 
 @media (max-width: 991.98px)

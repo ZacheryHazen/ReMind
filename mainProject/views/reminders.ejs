@@ -7,5 +7,45 @@
     </head>
     <body class="reMindPage">
         <%- include('partials/navbar') %>
+        <div class="container-xxl container-fluid remindBodyText">
+            <div class="row justify-content-center">
+                <div class="col-12 mt-2">
+                    <h3 class="homePageAndListHeader mb-0">All Reminders</h3>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-3 ms-3">
+                        
+                    </div>
+                    <div class="col-3 alignTextEnd ms-3 me-1 addButton">
+                        <a href="lists/reminder" class="reMindLinks">+ Add Reminder</a>
+                    </div>
+                    <% if (Object.keys(reminders).length > 0) { %>
+                        <% for (let reminderCounter = 0; reminderCounter < Object.keys(reminders).length; reminderCounter++) { %>
+                            <% if (reminderCounter == 0 || reminderCounter == 3) { %>
+                                <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
+                            <% } else { %>
+                                <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
+                            <% } %>
+                                <a href="/reminders/<%-reminders[reminderCounter].id%>" class="tileLink">
+                                    <h4 class="homePageAndListHeader">
+                                        <%= reminders[reminderCounter].name %>
+                                    </h4>
+                                    <p>
+                                        <%  if (reminders[reminderCounter].description.length < 300) {%> 
+                                            <%= reminders[reminderCounter].description %>
+                                        <% } else {%>
+                                            <%= reminders[reminderCounter].description.substring(0,297) %>...
+                                        <% } %>
+                                    </p>
+                                </a>
+                            </div> 
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
     </body>
 </html> 

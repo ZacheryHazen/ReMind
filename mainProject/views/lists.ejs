@@ -9,27 +9,41 @@
         <%- include('partials/navbar') %>
         <div class="container-xxl container-fluid remindBodyText">
             <div class="row justify-content-center">
-                <div class="col-12 mt-2 mb-1">
-                    <h3 class="homePageAndListHeader">All Lists</h3>
+                <div class="col-12 mt-2">
+                    <h3 class="homePageAndListHeader mb-0">All Lists</h3>
                 </div>
                 <div class="row justify-content-center">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-3 ms-3">
+                        
+                    </div>
+                    <div class="col-3 alignTextEnd ms-3 me-1 addButton">
+                        <a href="lists/add" class="reMindLinks">+ Add List</a>
+                    </div>
                     <% if (Object.keys(lists).length > 0) { %>
                         <% for (let listCounter = 0; listCounter < Object.keys(lists).length; listCounter++) { %>
                             <% if (listCounter == 0 || listCounter == 3) { %>
-                                <div class="col-3 shadow mb-3 pt-1 remindHomeTiles">
+                                <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
                             <% } else { %>
-                                <div class="col-3 shadow ms-3 mb-3 pt-1 remindHomeTiles">
+                                <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
                             <% } %>
-                                <h4 class="homePageAndListHeader">
-                                    <%= lists[listCounter].name %>
-                                </h4>
-                                <ul>
-                                    <% for (let itemCounter = 0; itemCounter < 10 && itemCounter < Object.keys(lists[listCounter].items).length; itemCounter++) { %>
-                                        <li>
-                                            <%= lists[listCounter].items[itemCounter] %>
-                                        </li>
+                                <a href="/lists/<%-lists[listCounter].id%>" class="tileLink">
+                                    <h4 class="homePageAndListHeader">
+                                        <%= lists[listCounter].name %>
+                                    </h4>
+                                    <ul class="listItemUL">
+                                        <% for (let itemCounter = 0; itemCounter < 10 && itemCounter < Object.keys(lists[listCounter].items).length; itemCounter++) { %>
+                                            <li>
+                                                <%= lists[listCounter].items[itemCounter] %>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+                                    <% if (Object.keys(lists[listCounter].items).length > 10) { %>
+                                        And <%=lists[listCounter].items.length-10%> more item(s) not shown here.
                                     <% } %>
-                                </ul>
+                                </a>
                             </div> 
                         <% } %>
                     <% } %>
