@@ -2,7 +2,24 @@ let toDoItemsContainer = document.getElementById("toDoItems");
 let deleteIcons = document.getElementsByName("deleteIcon");
 let editIcons = document.getElementsByName("editIcon");
 let listItemLink = document.getElementById("addListItem");
+let checkBoxes = document.getElementsByClassName("form-check-input");
 let numberOfItems = toDoItemsContainer.children.length - 1;
+
+
+for (let icon of deleteIcons)
+{
+    icon.addEventListener("click", deleteItem);
+}
+
+for (let icon of editIcons)
+{
+    icon.addEventListener("click", editItem);
+}
+
+for (let checkBox of checkBoxes)
+{
+    checkBox.addEventListener("click", checkUnCheckItem);
+}
 
 listItemLink.addEventListener("click", function() {
     numberOfItems++;
@@ -16,11 +33,14 @@ listItemLink.addEventListener("click", function() {
     newCheckBox.classList.add("form-check-input");
     newCheckBox.classList.add("me-2");
     newCheckBox.classList.add("pb-1");
+    newCheckBox.name = "checkBox" + numberOfItems;
+    newCheckBox.addEventListener("click", checkUnCheckItem);
     newField.appendChild(newCheckBox);
     var newTextBox = document.createElement("input");
     newTextBox.type = "text";
     newTextBox.classList.add("form-control");
     newTextBox.classList.add("me-2");
+    newTextBox.name = "text" + numberOfItems;
     newTextBox.placeholder = "Enter List Item " + numberOfItems;
     newField.appendChild(newTextBox);
     var finishIcon = document.createElement("i");
@@ -48,27 +68,18 @@ listItemLink.addEventListener("click", function() {
 })  
 
 
-for (let icon of deleteIcons)
-{
-    icon.addEventListener("click", deleteItem);
-}
-
-for (let icon of editIcons)
-{
-    icon.addEventListener("click", editItem);
-}
-
 function deleteItem()
 {
     let parent = this.parentElement;
     var itemInput = parent.children[1];
     let index = parseInt(itemInput.placeholder.substring(16));
-    console.log(index);
     toDoItemsContainer.removeChild(parent);
     numberOfItems--;
     for (let counter = index; counter < toDoItemsContainer.children.length; counter++)
     {
-        toDoItemsContainer.children[counter-1].children[1].placeholder = "Enter List Item " + parseInt(parseInt(counter-1)+1);
+        toDoItemsContainer.children[counter-1].children[1].placeholder = "Enter List Item " + counter;
+        toDoItemsContainer.children[counter-1].children[0].name = "checkBox" + counter;
+        toDoItemsContainer.children[counter-1].children[1].name = "text" + counter;
     }
 }
 
@@ -107,4 +118,18 @@ function finishEditingItem()
     parent.removeChild(this);
     parent.insertBefore(editIcon, parent.children[2]);
     editIcon.addEventListener("click", editItem);
+}
+
+function checkUnCheckItem()
+{
+    let parent = this.parentElement;
+    let text = parent.children[1];
+    if (text.classList.contains("checkedItem"))
+    {
+        text.classList.remove("checkedItem");
+    }
+    else
+    {
+        text.classList.add("checkedItem");
+    }
 }

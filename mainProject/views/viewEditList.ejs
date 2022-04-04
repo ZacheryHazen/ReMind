@@ -8,7 +8,7 @@
 <body class="reMindPage">
     <%- include('partials/navbar') %>
     <div class="container-xxl container-fluid remindBodyText">
-        <form action="/lists/<%=list.id%>?_method=PATCH" method="post">
+        <form method="POST" action="/lists/<%=list.id%>?_method=PUT">
             <div class="row">
                 <div class="col-12 mt-2">
                     <h3 class="homePageAndListHeader">View List - <%=list.name%></h3>
@@ -18,8 +18,13 @@
                 <div class="col-6 shadow remindFormTiles" id="toDoItems">
                     <% for (let itemCounter = 0; itemCounter < Object.keys(list.items).length; itemCounter++) { %>
                         <div class="container editViewItemRow d-flex pt-2">
-                            <input type="checkbox" class="form-check-input me-2 pb-1">
-                            <input type="text" class="form-control me-2 editViewItemInputReadonly" value="<%= list.items[itemCounter] %>" readonly placeholder="Enter List Item <%=itemCounter+1%>"></input>
+                            <% if (list.items[itemCounter][1] == true) { %>
+                                <input type="checkbox" class="form-check-input me-2 pb-1" name="checkBox<%=itemCounter+1%>" checked>
+                                <input type="text" class="form-control me-2 editViewItemInputReadonly checkedItem" value="<%= list.items[itemCounter][0] %>" readonly placeholder="Enter List Item <%=itemCounter+1%>" name="text<%=itemCounter+1%>"></input>
+                            <% } else { %>
+                                <input type="checkbox" class="form-check-input me-2 pb-1" name="checkBox<%=itemCounter+1%>">
+                                <input type="text" class="form-control me-2 editViewItemInputReadonly" value="<%= list.items[itemCounter][0] %>" readonly placeholder="Enter List Item <%=itemCounter+1%>" name="text<%=itemCounter+1%>"></input>
+                            <% } %>
                             <i class="bi bi-pencil ms-auto bootstrapIcon reMindLinks" name="editIcon"></i>
                             <i class="bi bi-trash bootstrapIcon reMindLinks ms-2" name="deleteIcon"></i>
                         </div>

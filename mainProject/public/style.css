@@ -230,6 +230,21 @@
     font-size: 19pt;
 }
 
+.checkedItem
+{
+    text-decoration: line-through;
+}
+
+.datePicker,.timePicker
+{
+    width: 25%;
+}
+
+.frequencySelect
+{
+    width: 20%;
+}
+
 #signInButton
 {
     width: 100%;
@@ -238,6 +253,17 @@
 #addListButton
 {
     width: 15%;
+}
+
+#reminderDescription
+{
+    width:100%;
+    height: 10rem;
+}
+
+#frequencySelectLabel, #timePickerLabel, #datePickerLabel
+{
+    align-self: center;
 }
 
 @media (max-width: 991.98px)

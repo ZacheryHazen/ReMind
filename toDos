@@ -16,5 +16,8 @@ Functionality to Implement:
 SQL Database
 Reviews - How They Work and their synchronization with Reminders
 Reminders Having Times Set - Notifications
-Checkboxes for Lists
+---Checkboxes for Lists
 User Authentication
+
+DatePicker needs to restrict to the future.
+TimePicker needs to as well in the one time reminders if they select the current date.
