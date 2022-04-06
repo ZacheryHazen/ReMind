@@ -33,6 +33,25 @@
                                     <h4 class="homePageAndListHeader">
                                         <%= reminders[reminderCounter].name %>
                                     </h4>
+                                    <h5>
+                                        <% if (reminders[reminderCounter].frequency == "oneTime") { %>
+                                            One Time Reminder <br />
+                                        <% } else { %>
+                                            <%= reminders[reminderCounter].frequency %> Reminder <br />
+                                        <% } %>
+                                        <% if (reminders[reminderCounter].frequency == "Weekly" || reminders[reminderCounter].frequency == "Biweekly") { %>
+                                            <% for (let dayCounter = 0; dayCounter < reminders[reminderCounter].daysRepeated.length; dayCounter++) { %>
+                                                <% if (dayCounter != reminders[reminderCounter].daysRepeated.length - 1) {%>
+                                                    <%= reminders[reminderCounter].daysRepeated[dayCounter] +", " %>
+                                                <% } else { %>
+                                                    <%= reminders[reminderCounter].daysRepeated[dayCounter]%><br />
+                                                <% } %>
+                                            <% } %>
+                                        <% } else if (reminders[reminderCounter].frequency == "oneTime") { %>
+                                            <%= reminders[reminderCounter].dateNotified %> <br />
+                                        <% } %>
+                                        <%= reminders[reminderCounter].timeNotified %>
+                                    </h5>
                                     <p>
                                         <%  if (reminders[reminderCounter].description.length < 300) {%> 
                                             <%= reminders[reminderCounter].description %>

@@ -1,11 +1,24 @@
 let fieldsContainer = document.getElementById("reminderFields");
 let radioOneTime = document.getElementById("frequencyRadioOneTime");
 let radioRepeated = document.getElementById("frequencyRadioRepeated");
-
+let submitButton = document.getElementById("addReminderButton");
+var timePicker = document.getElementById("timePicker");
+var reminderNameInput = document.getElementById("reminderName");
 
 radioOneTime.addEventListener("click", displayOneTimeFields);
 radioRepeated.addEventListener("click", displayRepeatedFields);
+submitButton.addEventListener("click", checkToSubmitForm);
+var form = document.getElementById("reminderForm");
 
+var timePicker = document.getElementById('timePicker');
+timePicker.addEventListener("input", () => {
+    timePicker.setCustomValidity("");
+})
+
+var datePicker = document.getElementById('datePicker');
+datePicker.addEventListener("input", () => {
+    datePicker.setCustomValidity("");
+})
 
 function displayOneTimeFields()
 {
@@ -35,9 +48,14 @@ function displayOneTimeFields()
         let newInput = document.createElement("input");
         newInput.type = "date";
         newInput.name = "datePicker";
+        newInput.id = "datePicker";
         newInput.classList.add("ms-auto");
         newInput.classList.add("datePicker");
+        newInput.setAttribute("required", "");
         newDiv.appendChild(newInput);
+        newInput.addEventListener("input", () => {
+            newInput.setCustomValidity("");
+        })
         fieldsContainer.insertBefore(newDiv, document.getElementById("reminderDescriptionContainer"));
     }
 }
@@ -69,16 +87,19 @@ function displayRepeatedFields()
         newSelect.id = "frequencySelect";
         let option1 = document.createElement("option");
         option1.value = "Daily";
+        option1.name = "optionDaily";
         option1.id = "optionDaily";
         option1.innerText = "Daily";
         newSelect.appendChild(option1);
         let option2 = document.createElement("option");
         option2.value = "Weekly";
+        option2.name = "optionWeekly";
         option2.id = "optionWeekly";
         option2.innerText = "Weekly";
         newSelect.appendChild(option2);
         let option3 = document.createElement("option");
-        option3.value = "Biweekly"
+        option3.value = "Biweekly";
+        option3.name = "optionBiweekly";
         option3.id = "optionBiweekly";
         option3.innerText = "Biweekly";
         newSelect.appendChild(option3);
@@ -93,12 +114,10 @@ function displayOrRemoveDayOptions()
     let select = document.getElementById("frequencySelect");
     if (select.value != "Daily")
     {
-        console.log("1");
         displayDayOptions();
     }
     else
     {
-        console.log("2");
         removeDayOptions();
     }
 }
@@ -120,11 +139,12 @@ function displayDayOptions()
             let newCheckBox = document.createElement("input");
             newCheckBox.classList.add("form-check-input");
             newCheckBox.type = "checkbox";
-            newCheckBox.name = days[counter].toLowerCase + "CheckBox";
+            newCheckBox.name = days[counter].toLowerCase() + "CheckBox";
+            newCheckBox.id = days[counter].toLowerCase() + "CheckBox";
             newDiv.appendChild(newCheckBox);
             let newLabel = document.createElement("label");
             newLabel.classList.add("form-check-label");
-            newLabel.htmlFor = days[counter].toLowerCase + "CheckBox";
+            newLabel.htmlFor = days[counter].toLowerCase() + "CheckBox";
             newLabel.innerHTML = days[counter];
             newDiv.appendChild(newLabel);
         }
@@ -137,5 +157,100 @@ function removeDayOptions()
     if (!!document.getElementById("dayCheckBoxesContainer"))
     {
         fieldsContainer.removeChild(document.getElementById("dayCheckBoxesContainer"));
+    }
+}
+
+function checkToSubmitForm()
+{
+    if (reminderNameInput.value == "" || timePicker.value =="")
+    {
+        reminderNameInput.reportValidity();
+        timePicker.reportValidity();
+    }
+    else if (!!document.getElementById("datePickerContainer"))
+    {
+        let today = new Date();
+        let currentYear = parseInt(today.getFullYear());
+        let currentMonth = parseInt(today.getMonth()+1);
+        let currentDate = parseInt(today.getDate());
+        let currentHour = parseInt(today.getHours());
+        let currentMinute = parseInt(today.getMinutes());
+        var datePicker = document.getElementById("datePicker");
+        let datePickerYear = parseInt(datePicker.value.substring(0,4));
+        let datePickerMonth = parseInt(datePicker.value.substring(5,7));
+        let datePickerDay =  parseInt(datePicker.value.substring(8,10));
+        let timePickerHour = parseInt(timePicker.value.substring(0,2));
+        let timePickerMinute = parseInt(timePicker.value.substring(3,5));
+
+        if (datePicker.value == "")
+        {
+            datePicker.reportValidity();
+        }
+        else if (datePickerYear == currentYear)
+        {
+            if (datePickerMonth == currentMonth)
+            {
+                if (datePickerDay == currentDate)
+                {
+                    if (timePickerHour == currentHour)
+                    {
+                        if (timePickerMinute <= currentMinute)
+                        {
+                            timePicker.setCustomValidity("Please enter a valid time in the future.");
+                            timePicker.reportValidity();
+                        }
+                    }
+                    else if (timePickerHour < currentHour)
+                    {
+                        timePicker.setCustomValidity("Please enter a valid time in the future.");
+                        timePicker.reportValidity();
+                    }
+                }
+                else if (datePickerDay < currentDate)
+                {
+                    datePicker.setCustomValidity("Please enter a valid date in the future.");
+                    datePicker.reportValidity();
+                }
+            }
+            else if (datePickerMonth < currentMonth)
+            {
+                datePicker.setCustomValidity("Please enter a valid date in the future.");
+                datePicker.reportValidity();
+            }
+        }
+        else if (datePickerYear < currentYear)
+        {
+            datePicker.setCustomValidity("Please enter a valid date in the future.");
+            datePicker.reportValidity();
+        }
+        else 
+        {
+            form.submit();
+        }
+    }
+    else if (!!document.getElementById("dayCheckBoxesContainer"))
+    {
+        var sundayBox = document.getElementById("sundayCheckBox");
+        var mondayBox = document.getElementById("mondayCheckBox");
+        var tuesdayBox = document.getElementById("tuesdayCheckBox");
+        var wednesdayBox = document.getElementById("wednesdayCheckBox");
+        var thursdayBox = document.getElementById("thursdayCheckBox");
+        var fridayBox = document.getElementById("fridayCheckBox");
+        var saturdayBox = document.getElementById("saturdayCheckBox");
+
+        if (!sundayBox.checked && !mondayBox.checked && !tuesdayBox.checked && !wednesdayBox.checked && !thursdayBox.checked && !fridayBox.checked && !saturdayBox.checked)
+        {
+            let frequencySelect = document.getElementById("frequencySelect");
+            frequencySelect.setCustomValidity("Please select a day(s) of the week or change to a different notification frequency for the reminder to notify you.");
+            frequencySelect.reportValidity();
+        }
+        else
+        {
+            form.submit();
+        }
+    }
+    else 
+    {
+        form.submit();
     }
 }

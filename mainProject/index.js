@@ -55,51 +55,55 @@ let reminders = [
     {
         id: 1,
         name: "Dentist Appointment",
+        frequency: "Weekly",
+        daysRepeated: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        dateNotified: null,
+        timeNotified: "17:32",
         description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
     },
     {
         id: 2,
         name: "Dentist Appointment",
+        frequency: "Biweekly",
+        daysRepeated: ["Tue", "Wed", "Thu", "Fri", "Sat"],
+        dateNotified: null,
+        timeNotified: "17:32",
         description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
     },
     {
         id: 3,
         name: "Dentist Appointment",
+        frequency: "oneTime",
+        daysRepeated: null,
+        dateNotified: "2023-03-14",
+        timeNotified: "17:32",
         description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
     },
     {
         id: 4,
         name: "Dentist Appointment",
-        description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned."
+        frequency: "Daily",
+        daysRepeated: null,
+        dateNotified: null,
+        timeNotified: "17:32",
+        description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
     },
     {
         id: 5,
         name: "Dentist Appointment",
+        frequency: "oneTime",
+        daysRepeated: null,
+        dateNotified: "2021-03-14",
+        timeNotified: "17:32",
         description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
     },
     {
         id: 6,
         name: "Dentist Appointment",
-        description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
-    },
-    {
-        id: 7,
-        name: "Dentist Appointment",
-        description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
-    },
-    {
-        id: 8,
-        name: "Dentist Appointment",
-        description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
-    },
-    {
-        id: 9,
-        name: "Dentist Appointment",
-        description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
-    },
-    {
-        id: 10,
-        name: "Dentist Appointment",
+        frequency: "oneTime",
+        daysRepeated: null,
+        dateNotified: "2022-04-05",
+        timeNotified: "17:32",
         description: "i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. i love going to the dentist because i love having my teeth cleaned. "
     }
 ];
@@ -137,11 +141,11 @@ app.post('/lists', (req, res) => {
     {
         if (Object.values(req.body)[counter] != '')
         {
-            newValues.push((Object.values(req.body))[counter]);
+            newValues.push([(Object.values(req.body))[counter], false]);
         }
     }
     lists.push({ id: newId, name: newName, items: newValues});
-    res.render('lists.ejs', { lists });
+    res.redirect("/lists");
 });
 
 app.get('/lists/add', (req, res) => {
@@ -173,6 +177,7 @@ app.put('/lists/:id', (req, res) => {
     lists[listIndex].items = newValues;
     res.redirect("/lists");
 });
+
 app.get('/lists/:id', (req, res) => {
     let id = req.params.id;
     let list = lists.find(l => l.id == id);
@@ -185,6 +190,78 @@ app.get('/reminders', (req, res) => {
 
 app.get('/reminders/add', (req, res) => {
    res.render('addReminder.ejs');     
+});
+
+app.post('/reminders', (req, res) => {
+    let keys = Object.keys(req.body);
+    let values = Object.values(req.body);
+    let newId = Object.keys(reminders).length + 1;
+    let newValue;
+    if (req.body["frequencyRadio"] == "oneTime")
+    {
+        newValue = { id: newId, 
+            name: req.body["reminderName"], 
+            frequency: req.body["frequencyRadio"], 
+            daysRepeated: null,
+            dateNotified: req.body["datePicker"], 
+            timeNotified: req.body["timePicker"], 
+            description: req.body["reminderDescription"]};
+    }
+    else
+    {
+        let days = [];
+        if (req.body["frequencySelect"] != "Daily")
+        {
+            if (keys.find(x => x == "sundayCheckBox"))
+            {
+                days.push("Sun");
+            }
+            if (keys.find(x => x == "mondayCheckBox"))
+            {
+                days.push("Mon");
+            }
+            if (keys.find(x => x == "tuesdayCheckBox"))
+            {
+                days.push("Tue");
+            }
+            if (keys.find(x => x == "wednesdayCheckBox"))
+            {
+                days.push("Wed");
+            }
+            if (keys.find(x => x == "thursdayCheckBox"))
+            {
+                days.push("Thu");
+            }
+            if (keys.find(x => x == "fridayCheckBox"))
+            {
+                days.push("Fri");
+            }
+            if (keys.find(x => x == "sundayCheckBox"))
+            {
+                days.push("Sun");
+            }
+        }
+        else
+        {
+            days = null;
+        }
+
+        newValue = { id: newId,
+            name: req.body["reminderName"], 
+            frequency: req.body["frequencySelect"], 
+            daysRepeated: days,
+            dateNotified: null,
+            timeNotified: req.body["timePicker"], 
+            description: req.body["reminderDescription"]};
+    }
+    reminders.push(newValue);
+    res.redirect('/reminders');
+});
+
+app.get('/reminders/:id', (req, res) => {
+    let id = req.params.id;
+    let reminder = reminders.find(r => r.id == id);
+    res.render('viewEditReminder.ejs', { reminder });
 });
 
 app.get('/reviews', (req, res) => {

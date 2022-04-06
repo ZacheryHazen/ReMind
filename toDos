@@ -1,5 +1,5 @@
 Pages Left:
-Reminder Add Page
+---Reminder Add Page
 Reminder Edit/View Page
 Reviews Page
 Review Add Page
@@ -15,9 +15,11 @@ Sign Up Page
 Functionality to Implement:
 SQL Database
 Reviews - How They Work and their synchronization with Reminders
-Reminders Having Times Set - Notifications
+--Reminders Having Times Set
+Notifications for Reminders
 ---Checkboxes for Lists
 User Authentication
+Deleting Lists
 
-DatePicker needs to restrict to the future.
-TimePicker needs to as well in the one time reminders if they select the current date.
+---DatePicker needs to restrict to the future.
+---TimePicker needs to as well in the one time reminders if they select the current date.
