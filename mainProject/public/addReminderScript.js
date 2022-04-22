@@ -97,12 +97,6 @@ function displayRepeatedFields()
         option2.id = "optionWeekly";
         option2.innerText = "Weekly";
         newSelect.appendChild(option2);
-        let option3 = document.createElement("option");
-        option3.value = "Biweekly";
-        option3.name = "optionBiweekly";
-        option3.id = "optionBiweekly";
-        option3.innerText = "Biweekly";
-        newSelect.appendChild(option3);
         newDiv.appendChild(newSelect);
         fieldsContainer.insertBefore(newDiv, document.getElementById("timePickerContainer"));
         newSelect.addEventListener("change", displayOrRemoveDayOptions);
@@ -199,11 +193,19 @@ function checkToSubmitForm()
                             timePicker.setCustomValidity("Please enter a valid time in the future.");
                             timePicker.reportValidity();
                         }
+                        else
+                        {
+                            form.submit();
+                        }
                     }
                     else if (timePickerHour < currentHour)
                     {
                         timePicker.setCustomValidity("Please enter a valid time in the future.");
                         timePicker.reportValidity();
+                    }
+                    else
+                    {
+                        form.submit();
                     }
                 }
                 else if (datePickerDay < currentDate)
@@ -211,11 +213,19 @@ function checkToSubmitForm()
                     datePicker.setCustomValidity("Please enter a valid date in the future.");
                     datePicker.reportValidity();
                 }
+                else
+                {
+                    form.submit();
+                }
             }
             else if (datePickerMonth < currentMonth)
             {
                 datePicker.setCustomValidity("Please enter a valid date in the future.");
                 datePicker.reportValidity();
+            }
+            else
+            {
+                form.submit();
             }
         }
         else if (datePickerYear < currentYear)

@@ -2,7 +2,7 @@
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="/style.css">
-        <link rel="icon" href="/icon.png">
+        <link rel="icon" href="/icon.png?v=1.1">
         <title>Re-Mind - Reminders</title>
     </head>
     <body class="reMindPage">
@@ -22,41 +22,41 @@
                     <div class="col-3 alignTextEnd ms-3 me-1 addButton">
                         <a href="reminders/add" class="reMindLinks">+ Add Reminder</a>
                     </div>
-                    <% if (Object.keys(reminders).length > 0) { %>
-                        <% for (let reminderCounter = 0; reminderCounter < Object.keys(reminders).length; reminderCounter++) { %>
+                    <% if (Object.keys(passedReminders).length > 0) { %>
+                        <% for (let reminderCounter = 0; reminderCounter < Object.keys(passedReminders).length; reminderCounter++) { %>
                             <% if (reminderCounter % 3 == 0) { %>
                                 <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
                             <% } else { %>
                                 <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
                             <% } %>
-                                <a href="/reminders/<%-reminders[reminderCounter].id%>" class="tileLink">
+                                <a href="/reminders/<%-passedReminders[reminderCounter].id%>" class="tileLink">
                                     <h4 class="homePageAndListHeader">
-                                        <%= reminders[reminderCounter].name %>
+                                        <%= passedReminders[reminderCounter].name %>
                                     </h4>
                                     <h5>
-                                        <% if (reminders[reminderCounter].frequency == "oneTime") { %>
+                                        <% if (passedReminders[reminderCounter].frequency == "oneTime") { %>
                                             One Time Reminder <br />
                                         <% } else { %>
-                                            <%= reminders[reminderCounter].frequency %> Reminder <br />
+                                            <%= passedReminders[reminderCounter].frequency %> Reminder <br />
                                         <% } %>
-                                        <% if (reminders[reminderCounter].frequency == "Weekly" || reminders[reminderCounter].frequency == "Biweekly") { %>
-                                            <% for (let dayCounter = 0; dayCounter < reminders[reminderCounter].daysRepeated.length; dayCounter++) { %>
-                                                <% if (dayCounter != reminders[reminderCounter].daysRepeated.length - 1) {%>
-                                                    <%= reminders[reminderCounter].daysRepeated[dayCounter] +", " %>
+                                        <% if (passedReminders[reminderCounter].frequency == "Weekly" || passedReminders[reminderCounter].frequency == "Biweekly") { %>
+                                            <% for (let dayCounter = 0; dayCounter < passedReminders[reminderCounter].daysRepeated.length; dayCounter++) { %>
+                                                <% if (dayCounter != passedReminders[reminderCounter].daysRepeated.length - 1) {%>
+                                                    <%= passedReminders[reminderCounter].daysRepeated[dayCounter] +", " %>
                                                 <% } else { %>
-                                                    <%= reminders[reminderCounter].daysRepeated[dayCounter]%><br />
+                                                    <%= passedReminders[reminderCounter].daysRepeated[dayCounter]%><br />
                                                 <% } %>
                                             <% } %>
-                                        <% } else if (reminders[reminderCounter].frequency == "oneTime") { %>
-                                            <%= reminders[reminderCounter].dateNotified %> <br />
+                                        <% } else if (passedReminders[reminderCounter].frequency == "oneTime") { %>
+                                            <%= passedReminders[reminderCounter].dateNotified %> <br />
                                         <% } %>
-                                        <%= reminders[reminderCounter].timeNotified %>
+                                        <%= passedReminders[reminderCounter].timeNotified %>
                                     </h5>
                                     <p>
-                                        <%  if (reminders[reminderCounter].description.length < 300) {%> 
-                                            <%= reminders[reminderCounter].description %>
+                                        <%  if (passedReminders[reminderCounter].description.length < 300) {%> 
+                                            <%= passedReminders[reminderCounter].description %>
                                         <% } else {%>
-                                            <%= reminders[reminderCounter].description.substring(0,297) %>...
+                                            <%= passedReminders[reminderCounter].description.substring(0,297) %>...
                                         <% } %>
                                     </p>
                                 </a>
@@ -66,5 +66,18 @@
                 </div>
             </div>
         </div>
+        <script>
+            let passedReminders = <%- JSON.stringify(passedReminders) %>;
+        </script>
+        <script src="notificationHandler.js"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('/notification.js');
+            }
+            else
+            {
+                console.log("Error: Service Worker not Loaded");
+            }
+        </script>
     </body>
 </html> 
