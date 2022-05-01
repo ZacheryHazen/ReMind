@@ -7,81 +7,94 @@
         <title>Re-Mind - Statistics</title>
     </head>
     <body class="reMindPage">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%- include('partials/navbar') %>
-        <div class="container-xxl container-fluid remindBodyText">
-            <div class="row justify-content-center">
+        <div class="container-fluid p-0 container-md statisticsText">
+            <div class="row container m-0 p-0 justify-content-center">
                 <div class="col-12 mt-2">
                     <h3 class="homePageAndListHeader mb-2">Weekly Statistics</h3>
                 </div>
-                <div class="col-3"></div>
-                <div class="col-6 remindFormTiles p-2">
-                    <div class="container-fluid statisticTable">
-                        <% for (let counter = 0; counter < weekStatistics.length; counter++) { %>
-                            <div class="row statisticRow ms-0 me-0" id=<%="week"+ counter%>>
-                                <div class="col-6 statisticHeader"><%=weekStatistics[counter].header%></div>
-                                <div class="col-6 statisticRating">
-                                    Average Rating: <%=weekStatistics[counter].overallRating%>
+                <div class="col-sm-3"></div>
+                <% if (weekStatistics.length > 0) { %>
+                    <div class="col-sm-6 col-10 remindFormTiles shadow p-2">
+                        <div class="container-fluid statisticTable">
+                            <% for (let counter = 0; counter < weekStatistics.length; counter++) { %>
+                                <div class="row statisticRow ms-0 me-0" id=<%="week"+ counter%>>
+                                    <div class="col-sm-6 col-7 statisticHeader pe-0"><%=weekStatistics[counter].header%></div>
+                                    <div class="col-sm-6 col-5 statisticRating pe-0">
+                                        Weekly Rating: <%=weekStatistics[counter].overallRating%>
+                                    </div>
                                 </div>
-                            </div>
-                            <% for (let ratingCounter = 0; ratingCounter < weekStatistics[counter].ratings.length; ratingCounter++) { %>
-                                <% if (ratingCounter == weekStatistics[counter].ratings.length-1) { %>
-                                    <div class="row statisticLastDescription ms-0 me-0" name=<%="week"+ counter + "info"%> hidden>
-                                <% } else { %>
-                                    <div class="row statisticDescription ms-0 me-0" name=<%="week"+ counter + "info"%> hidden>
-                                <% } %>
-                                    <div class="col-6">
-                                        <% let currentReview = passedReviews.find(r => r.id == weekStatistics[counter].reviewIds[ratingCounter]) %>
-                                        <% if (currentReview.type == "other") { %>
-                                            <%= currentReview.name %>
-                                        <% } else if (currentReview.type == "reminder") { %>
-                                            <%= reminders.find(reminder => reminder.id == currentReview.reminderID).name %>
-                                        <% } else if (currentReview.type == "day") { %>
-                                            Day Review
-                                        <% } %>
+                                <% for (let ratingCounter = 0; ratingCounter < weekStatistics[counter].ratings.length; ratingCounter++) { %>
+                                    <% if (ratingCounter == weekStatistics[counter].ratings.length-1) { %>
+                                        <div class="row statisticLastDescription ms-0 me-0 pe-0" name=<%="week"+ counter + "info"%> hidden>
+                                    <% } else { %>
+                                        <div class="row statisticDescription ms-0 me-0 pe-0" name=<%="week"+ counter + "info"%> hidden>
+                                    <% } %>
+                                        <div class="col-sm-6 col-7">
+                                            <% let currentReview = passedReviews.find(r => r.reviewID == weekStatistics[counter].reviewIds[ratingCounter]) %>
+                                            <% if (currentReview.type == "other") { %>
+                                                <%= currentReview.name %>
+                                            <% } else if (currentReview.type == "reminder") { %>
+                                                <%= reminders.find(reminder => reminder.reminderID == currentReview.reminderID).name %>
+                                            <% } else if (currentReview.type == "day") { %>
+                                                Day Review - <%= currentReview.date %>
+                                            <% } %>
                                         </div>
-                                    <div class="col-6"><%=weekStatistics[counter].ratings[ratingCounter]%></div>
-                                </div>
+                                        <div class="col-sm-6 col-5"><%=weekStatistics[counter].ratings[ratingCounter]%></div>
+                                    </div>
+                                <% } %>
                             <% } %>
-                        <% } %>
+                        </div>
                     </div>
-                </div>
-                <div class="col-3"></div>
+                <% } else { %>
+                    <div class="centerText">
+                        No weekly statistics have been added yet due to a lack of created reviews!
+                    </div>
+                <% } %>
+                <div class="col-sm-3"></div>
                 <div class="col-12 mt-2">
                     <h3 class="homePageAndListHeader mb-2">Daily Statistics</h3>
                 </div>
-                <div class="col-3"></div>
-                <div class="col-6 remindFormTiles p-2">
-                    <div class="container-fluid statisticTable">
-                        <% for (let counter = 0; counter < dayStatistics.length; counter++) { %>
-                            <div class="row statisticRow ms-0 me-0" id=<%="day"+ counter%>>
-                                <div class="col-6 statisticHeader"><%=dayStatistics[counter].header%></div>
-                                <div class="col-6 statisticRating">
-                                    Average Rating: <%=dayStatistics[counter].overallRating%>
+                <div class="col-sm-3"></div>
+                <% if (dayStatistics.length > 0) { %>
+                    <div class="col-sm-6 col-10 remindFormTiles shadow p-2">
+                        <div class="container-fluid statisticTable">
+                            <% for (let counter = 0; counter < dayStatistics.length; counter++) { %>
+                                <div class="row statisticRow ms-0 me-0" id=<%="day"+ counter%>>
+                                    <div class="col-sm-6 col-7 statisticHeader pe-0"><%=dayStatistics[counter].header%></div>
+                                    <div class="col-sm-6 col-5 statisticRating pe-0">
+                                        Daily Rating: <%=dayStatistics[counter].overallRating%>
+                                    </div>
                                 </div>
-                            </div>
-                            <% for (let ratingCounter = 0; ratingCounter < dayStatistics[counter].ratings.length; ratingCounter++) { %>
-                                <% if (ratingCounter == dayStatistics[counter].ratings.length-1) { %>
-                                    <div class="row statisticLastDescription ms-0 me-0" name= <%="day" + counter + "info"%> hidden>
-                                <% } else { %>
-                                    <div class="row statisticDescription ms-0 me-0" name=<%="day" + counter + "info"%> hidden>
-                                <% } %>
-                                    <div class="col-6">
-                                        <% let currentReview = passedReviews.find(r => r.id == dayStatistics[counter].reviewIds[ratingCounter]) %>
-                                        <% if (currentReview.type == "other") { %>
-                                            <%= currentReview.name %>
-                                        <% } else if (currentReview.type == "reminder") { %>
-                                            <%= reminders.find(reminder => reminder.id == currentReview.reminderID).name %>
-                                        <% } else if (currentReview.type == "day") { %>
-                                            Day Review
-                                        <% } %>
+                                <% for (let ratingCounter = 0; ratingCounter < dayStatistics[counter].ratings.length; ratingCounter++) { %>
+                                    <% if (ratingCounter == dayStatistics[counter].ratings.length-1) { %>
+                                        <div class="row statisticLastDescription ms-0 me-0 pe-0" name= <%="day" + counter + "info"%> hidden>
+                                    <% } else { %>
+                                        <div class="row statisticDescription ms-0 me-0 pe-0" name=<%="day" + counter + "info"%> hidden>
+                                    <% } %>
+                                        <div class="col-sm-6 col-7">
+                                            <% let currentReview = passedReviews.find(r => r.reviewID == dayStatistics[counter].reviewIds[ratingCounter]) %>
+                                            <% if (currentReview.type == "other") { %>
+                                                <%= currentReview.name %>
+                                            <% } else if (currentReview.type == "reminder") { %>
+                                                <%= reminders.find(reminder => reminder.reminderID == currentReview.reminderID).name %>
+                                            <% } else if (currentReview.type == "day") { %>
+                                                Day Review
+                                            <% } %>
                                         </div>
-                                    <div class="col-6"><%=dayStatistics[counter].ratings[ratingCounter]%></div>
-                                </div>
+                                        <div class="col-sm-6 col-5"><%=dayStatistics[counter].ratings[ratingCounter]%></div>
+                                    </div>
+                                <% } %>
                             <% } %>
-                        <% } %>
+                        </div>
                     </div>
-                </div>
-                <div class="col-3"></div>
+                <% } else { %>
+                    <div class="centerText">
+                        No daily statistics have been added yet due to a lack of created reviews!
+                    </div>
+                <% } %>
+                <div class="col-sm-3"></div>
             </div>
         </div>
         <script src="statisticsScript.js"></script>

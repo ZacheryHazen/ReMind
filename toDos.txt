@@ -3,31 +3,42 @@ Pages Left:
 ---Reminder Edit/View Page
 ---Reviews Page (1/2)
 ---Review Add Page
-Review Edit/View Page (1/2)
+---Review Edit/View Page (1/2)
 ---Statistics Page
 
-Simple About Page (1/3)
-Simple Contact Us Page (1/3)
-Simple Support Page (1/3)
-Forgot Username Page (1/2 day)
-Forgot Password Page (1/2 day)
-Sign Up Page (1/2 day) 
+---Simple About Page (1/3)
+---Simple Contact Us Page (1/3)
++++Simple Support Page (1/3)
++++Forgot Username Page (1/2 day)
++++Forgot Password Page (1/2 day)
+---Sign Up Page (1/2 day) 
 
 Functionality to Implement:
-SQL Database (1 day)
+---SQL Database (1 day)
+---allow only 32 character usernames and passwords
+---User Authentication (1/2 day)
+---Make Things Responsive (? days)
+---Comment JavaScript files
+Make ReadMe	
+Create advertisement
+---Make Notification not open new page
++++Make notifications work on phone
+---Delete Review
 ---Reviews - How They Work and their synchronization with Reminders (1 day with review add page)
 ---Reminders Having Times Set
 ---Notifications for Reminders 
 ---Checkboxes for Lists
-User Authentication (1/2 day)
 ---Deleting Lists and Reminders
 +++End-of-day review (1 day)
 ---Have custom "groups" of items (1 day)
-Make Things Responsive (? days)
 
-~8 days
+Server Admin:
+sa
+RePassMind2022	
 			
 Future Things:
-App
+Notifications on phones
+Mobile App
 End-of-day review
 AJAX refreshing things when they happen
+Security

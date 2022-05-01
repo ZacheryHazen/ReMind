@@ -7,36 +7,34 @@
         <title>Re-Mind - Reviews</title>
     </head>
     <body class="reMindPage">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%- include('partials/navbar') %>
-        <div class="container-xxl container-fluid remindBodyText">
-            <div class="row justify-content-center">
+        <div class="container-fluid p-0 container-md remindBodyText">
+            <div class="row container m-0 p-0 justify-content-center">
                 <div class="col-12 mt-2">
                     <h3 class="homePageAndListHeader mb-0">All Reviews</h3>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <h4 class="homePageAndListHeader mb-2 mt-2">Day Reviews</h4>
-                    </div>
-                    <div class="col-3">
+                <div class="row container m-0 p-0 justify-content-center">
+                    <div class="col-sm-3 col-4 mx-sm-2 p-0">
 
                     </div>
-                    <div class="col-3 ms-3">
-                        
+                    <div class="col-sm-3 col-4 mx-sm-2 mb-2 p-0">
+                        <h4 class="homePageAndListHeader mb-0">Day Reviews</h4>
                     </div>
-                    <div class="col-3 alignTextEnd ms-3 me-1 addButton">
-                        <a href="reviews/add" class="reMindLinks">+ Add Review</a>
+                    <div class="col-sm-3 col-4 alignTextEnd mx-sm-2 ms-sm-3 pe-1 p-sm-0 d-flex addButton">
+                        <a href="reviews/add" class="reMindLinks addLink">+ Add Review</a>
                     </div>
                     <% if (Object.keys(passedReviews).length > 0) { %>
                         <% let numDay = 0; %>
                         <% for (let reviewCounter = 0; reviewCounter < Object.keys(passedReviews).length; reviewCounter++) { %>
                             <% if (passedReviews[reviewCounter].type == "day") { %>
                                 <% if (numDay % 3 == 0) { %>
-                                    <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
+                                    <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 mx-2 remindHomeTiles tileLink">
                                 <% } else { %>
-                                    <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
+                                    <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 mx-2 ms-sm-3 remindHomeTiles tileLink">
                                 <% } %>
                                 <% numDay++; %>
-                                <a href="/reviews/<%-passedReviews[reviewCounter].id%>" class="tileLink">
+                                <a href="/reviews/<%-passedReviews[reviewCounter].reviewID%>" class="tileLink">
                                     <h4 class="homePageAndListHeader">
                                         <%= passedReviews[reviewCounter].date %>
                                     </h4>
@@ -61,8 +59,12 @@
                             </div> 
                             <%  } %>
                         <% } %>
+                    <% } else { %>
+                        <div class="centerText">
+                            No reviews for days have been added yet!
+                        </div>
                     <% } %>
-                    <div class="col-12 mt-1">
+                    <div class="col-12">
                         <h4 class="homePageAndListHeader mb-2">Reminder Reviews</h4>
                     </div>
                     <% if (Object.keys(passedReviews).length > 0) { %>
@@ -70,19 +72,19 @@
                         <% for (let reviewCounter = 0; reviewCounter < Object.keys(passedReviews).length; reviewCounter++) { %>
                             <% if (passedReviews[reviewCounter].type == "reminder") { %>
                                 <% if (numReminder % 3 == 0) { %>
-                                    <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
+                                    <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 px-1 px-sm-3 mx-2 remindHomeTiles tileLink">
                                 <% } else { %>
-                                    <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
+                                    <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 px-1 px-sm-3 mx-2 ms-sm-3 remindHomeTiles tileLink">
                                 <% } %>
                                 <% numReminder++; %>
-                                <a href="/reviews/<%-passedReviews[reviewCounter].id%>" class="tileLink">
+                                <a href="/reviews/<%-passedReviews[reviewCounter].reviewID%>" class="tileLink">
                                     <h4 class="homePageAndListHeader">
-                                        <% let currentReminder = allReminders.find(r => r.id == (passedReviews[reviewCounter].reminderID)); %>
+                                        <% let currentReminder = allReminders.find(r => r.reminderID == (passedReviews[reviewCounter].reminderID)); %>
                                         <%= currentReminder.name %> <br />
-                                        <% if (allReminders.find(r => r.id == passedReviews[reviewCounter].reminderID).frequency == "oneTime") {%>
-                                        <%= allReminders.find(r => r.id == passedReviews[reviewCounter].reminderID).dateNotified %>
+                                        <% if (currentReminder.frequency == "oneTime") {%>
+                                            <%= currentReminder.dateNotified %>
                                         <% } else { %>
-                                        <%= passedReviews[reviewCounter].date %>
+                                            <%= passedReviews[reviewCounter].date %>
                                         <% } %>
                                     </h4>
                                     <h5>
@@ -106,8 +108,12 @@
                             </div> 
                             <%  } %>
                         <% } %>
+                    <% } else { %>
+                        <div class="centerText">
+                            No reviews for reminders have been added yet!
+                        </div>
                     <% } %>
-                    <div class="col-12 mt-1">
+                    <div class="col-12">
                         <h4 class="homePageAndListHeader mb-2">Other Reviews</h4>
                     </div>
                     <% if (Object.keys(passedReviews).length > 0) { %>
@@ -115,12 +121,12 @@
                         <% for (let reviewCounter = 0; reviewCounter < Object.keys(passedReviews).length; reviewCounter++) { %>
                             <% if (passedReviews[reviewCounter].type == "other") { %>
                                 <% if (numOther % 3 == 0) { %>
-                                    <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
+                                    <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 mx-2 remindHomeTiles tileLink">
                                 <% } else { %>
-                                    <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
+                                    <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 mx-2 ms-sm-3 remindHomeTiles tileLink">
                                 <% } %>
                                 <% numOther++; %>
-                                <a href="/reviews/<%-passedReviews[reviewCounter].id%>" class="tileLink">
+                                <a href="/reviews/<%-passedReviews[reviewCounter].reviewID%>" class="tileLink">
                                     <h4 class="homePageAndListHeader">
                                         <%= passedReviews[reviewCounter].name %><br />
                                         <%= passedReviews[reviewCounter].date %>
@@ -146,6 +152,10 @@
                             </div> 
                             <%  } %>
                         <% } %>
+                    <% } else { %>
+                        <div class="centerText">
+                            No reviews for other events have been added yet!
+                        </div>
                     <% } %>
                 </div>
             </div>

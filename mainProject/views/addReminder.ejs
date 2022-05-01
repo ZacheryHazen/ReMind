@@ -6,23 +6,26 @@
         <title>Re-Mind - Add Reminder</title>
     </head>
     <body class="reMindPage">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%- include('partials/navbar') %>
-        <div class="container-xxl container-fluid remindBodyText">
+        <div class="container-fluid p-0 container-md remindBodyText">
             <form id="reminderForm" action="/reminders" method="post">    
-                <div class="row">
+                <div class="row container m-0 p-0 justify-content-center">
                     <div class="col-12 mt-2">
                         <h3 class="homePageAndListHeader mb-0">New Reminder</h3>
                     </div>
-                    <div class="col-3"></div>
-                    <div class="col-6 reMindFormTiles shadow mt-2 pt-2 pb-2">
+                    <div class="col-sm-3">
+
+                    </div>
+                    <div class="col-sm-6 col-10 reMindFormTiles shadow mt-2 pt-2 pb-2">
                         <label class="formLabel" for="listName">Reminder Name</label>
-                        <input type="text" class="form-control" name="reminderName" id="reminderName" placeholder="Enter Reminder Name" required>
+                        <input type="text" class="form-control" name="reminderName" id="reminderName" placeholder="Enter Reminder Name" maxlength="32" required>
                     </div>
-                    <div class="col-3">
-            
+                    <div class="col-sm-3">
+
                     </div>
-                    <div class="col-3"></div>
-                    <div class="col-6 reMindFormTiles shadow mt-2 pt-2" id="reminderFields">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6 col-10 reMindFormTiles shadow mt-2 pt-2" id="reminderFields">
                         <div class="container ps-0 mt-1">
                             What type of reminder would you like to set?<br />
                             <input class="form-check-input" type="radio" name="frequencyRadio" id="frequencyRadioOneTime"  value="oneTime" checked>
@@ -37,16 +40,17 @@
                             <label id="datePickerLabel" for="datePicker">What date should this reminder notify you?</label><input type="date" name="datePicker" id="datePicker" class="ms-auto datePicker" required>
                         </div>
                         <div class="container-fluid ps-0 pe-1 pb-3 form-floating" id="reminderDescriptionContainer">
-                            <textarea class="form-control" id="reminderDescription" name="reminderDescription"></textarea>
-                            <label for="reminderDescription">Please enter a description of the reminder:</label>
+                            <textarea class="form-control" id="reminderDescription" name="reminderDescription" maxlength="1000"></textarea>
+                            <label for="reminderDescription">Enter a description of the reminder:</label>
                         </div>
                     </div>
-                    <div class="col-3"></div>
-                    <div class="col-3"></div>
-                    <div class="col-6 reMindFormTiles shadow d-flex mt-2 pt-1 pb-1" id="cancelAddListButtonsContainer">
-                        <a href="/reminders" class="btn formLabel">Cancel</a>
-                        <button type="button" id="addReminderButton" class="btn formLabel redButton ms-auto">Save</button>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6 col-10 reMindFormTiles shadow d-flex mt-2 pt-1 pb-1" id="cancelAddListButtonsContainer">
+                        <a href="/reminders" class="btn formButton">Cancel</a>
+                        <button type="button" id="addReminderButton" class="btn formButton blueButton ms-auto">Save</button>
                     </div>
+                    <div class="col-sm-3"></div>
                 </div>
             </form>
         </div>

@@ -6,62 +6,63 @@
         <title>Re-Mind - Reminders</title>
     </head>
     <body class="reMindPage">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%- include('partials/navbar') %>
-        <div class="container-xxl container-fluid remindBodyText">
-            <div class="row justify-content-center">
-                <div class="col-12 mt-2">
-                    <h3 class="homePageAndListHeader mb-0">All Reminders</h3>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-3">
+        <div class="container-fluid p-0 container-md remindBodyText">
+            <div class="row container m-0 p-0 justify-content-center">
+                <div class="col-sm-3 col-4 mx-sm-2 p-0">
 
-                    </div>
-                    <div class="col-3 ms-3">
-                        
-                    </div>
-                    <div class="col-3 alignTextEnd ms-3 me-1 addButton">
-                        <a href="reminders/add" class="reMindLinks">+ Add Reminder</a>
-                    </div>
-                    <% if (Object.keys(passedReminders).length > 0) { %>
-                        <% for (let reminderCounter = 0; reminderCounter < Object.keys(passedReminders).length; reminderCounter++) { %>
-                            <% if (reminderCounter % 3 == 0) { %>
-                                <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
-                            <% } else { %>
-                                <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
-                            <% } %>
-                                <a href="/reminders/<%-passedReminders[reminderCounter].id%>" class="tileLink">
-                                    <h4 class="homePageAndListHeader">
-                                        <%= passedReminders[reminderCounter].name %>
-                                    </h4>
-                                    <h5>
-                                        <% if (passedReminders[reminderCounter].frequency == "oneTime") { %>
-                                            One Time Reminder <br />
-                                        <% } else { %>
-                                            <%= passedReminders[reminderCounter].frequency %> Reminder <br />
-                                        <% } %>
-                                        <% if (passedReminders[reminderCounter].frequency == "Weekly" || passedReminders[reminderCounter].frequency == "Biweekly") { %>
-                                            <% for (let dayCounter = 0; dayCounter < passedReminders[reminderCounter].daysRepeated.length; dayCounter++) { %>
-                                                <% if (dayCounter != passedReminders[reminderCounter].daysRepeated.length - 1) {%>
-                                                    <%= passedReminders[reminderCounter].daysRepeated[dayCounter] +", " %>
-                                                <% } else { %>
-                                                    <%= passedReminders[reminderCounter].daysRepeated[dayCounter]%><br />
-                                                <% } %>
-                                            <% } %>
-                                        <% } else if (passedReminders[reminderCounter].frequency == "oneTime") { %>
-                                            <%= passedReminders[reminderCounter].dateNotified %> <br />
-                                        <% } %>
-                                        <%= passedReminders[reminderCounter].timeNotified %>
-                                    </h5>
-                                    <p>
-                                        <%  if (passedReminders[reminderCounter].description.length < 300) {%> 
-                                            <%= passedReminders[reminderCounter].description %>
-                                        <% } else {%>
-                                            <%= passedReminders[reminderCounter].description.substring(0,297) %>...
-                                        <% } %>
-                                    </p>
-                                </a>
-                            </div> 
+                </div>
+                <div class="col-sm-3 col-4 mx-sm-2 mb-2 p-0">
+                    <h3 class="homePageAndListHeader mb-0 mt-2">All Reminders</h3>
+                </div>
+                <div class="col-sm-3 col-4 alignTextEnd mx-sm-2 ms-sm-3 pe-1 p-sm-0 d-flex addButton">
+                    <a href="reminders/add" class="reMindLinks addLink">+ Add Reminder</a>
+                </div>
+                <% if (Object.keys(passedReminders).length > 0) { %>
+                    <% for (let reminderCounter = 0; reminderCounter < Object.keys(passedReminders).length; reminderCounter++) { %>
+                        <% if (reminderCounter % 3 == 0) { %>
+                            <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 mx-2 remindHomeTiles tileLink">
+                        <% } else { %>
+                            <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 mx-2 ms-sm-3 remindHomeTiles tileLink">
                         <% } %>
+                            <a href="/reminders/<%-passedReminders[reminderCounter].reminderID%>" class="tileLink">
+                                <h4 class="homePageAndListHeader">
+                                    <%= passedReminders[reminderCounter].name %>
+                                </h4>
+                                <h5>
+                                    <% if (passedReminders[reminderCounter].frequency == "oneTime") { %>
+                                        One Time Reminder <br />
+                                    <% } else { %>
+                                        <%= passedReminders[reminderCounter].frequency %> Reminder <br />
+                                    <% } %>
+                                    <% if (passedReminders[reminderCounter].frequency == "Weekly" || passedReminders[reminderCounter].frequency == "Biweekly") { %>
+                                        <% for (let dayCounter = 0; dayCounter < passedReminders[reminderCounter].daysRepeated.length; dayCounter++) { %>
+                                            <% if (dayCounter != passedReminders[reminderCounter].daysRepeated.length - 1) {%>
+                                                <%= passedReminders[reminderCounter].daysRepeated[dayCounter] +", " %>
+                                            <% } else { %>
+                                                <%= passedReminders[reminderCounter].daysRepeated[dayCounter]%><br />
+                                            <% } %>
+                                        <% } %>
+                                    <% } else if (passedReminders[reminderCounter].frequency == "oneTime") { %>
+                                        <%= passedReminders[reminderCounter].dateNotified %> <br />
+                                    <% } %>
+                                    <%= passedReminders[reminderCounter].timeNotified %>
+                                </h5>
+                                <p>
+                                    <%  if (passedReminders[reminderCounter].description.length < 300) {%> 
+                                        <%= passedReminders[reminderCounter].description %>
+                                    <% } else {%>
+                                        <%= passedReminders[reminderCounter].description.substring(0,297) %>...
+                                    <% } %>
+                                </p>
+                            </a>
+                        </div> 
+                    <% } %>
+                    <% } else { %>
+                        <div class="centerText">
+                            No reminders have been added yet!
+                        </div>
                     <% } %>
                 </div>
             </div>

@@ -7,29 +7,30 @@
         <title>Re-Mind - Add List</title>
     </head>
     <body class="reMindPage">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%- include('partials/navbar') %>
-        <div class="container-xxl container-fluid remindBodyText">
+        <div class="container-fluid p-0 container-md remindBodyText">
             <form action="/lists" method="post">
-                <div class="row">
+                <div class="row container m-0 p-0 justify-content-center">
                     <div class="col-12 mt-2">
-                        <h3 class="homePageAndListHeader mb-0">New List</h3>
+                        <h3 class="homePageAndListHeader mb-0">Add List</h3>
                     </div>
-                    <div class="col-3">
+                    <div class="col-sm-3">
 
                     </div>
-                    <div class="col-6 reMindFormTiles shadow mt-2 pt-2 pb-2">
+                    <div class="col-sm-6 col-10 reMindFormTiles shadow mt-2 pt-2 pb-2">
                         <label class="formLabel" for="listName">List Name</label>
-                        <input type="text" class="form-control" name="listName" id="listName" placeholder="Enter List Name" required>
+                        <input type="text" class="form-control" name="listName" id="listName" placeholder="Enter List Name" maxlength="32" required>
                     </div>
-                    <div class="col-3">
+                    <div class="col-sm-3">
 
                     </div>
-                    <div class="col-3"></div>
-                    <div class="col-6 reMindFormTiles shadow mt-2 pt-2" id="toDoItems">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6 col-10 reMindFormTiles shadow mt-2 pt-2" id="toDoItems">
                         <div class="container formListItem">
                             <label class="formLabel" for="listItem1">Enter List Item 1:</label>
                             <div class="listItemRow">
-                                <input type="text" class="form-control me-1" name="listItem1" id="listItem1" placeholder="Enter List Item 1">
+                                <input type="text" class="form-control me-1" name="listItem1" id="listItem1" placeholder="Enter List Item 1" maxlength="200">
                                 <i class="bi bi-trash bootstrapIcon reMindLinks" name="deleteIcon"></i>
                             </div>
                         </div>
@@ -42,15 +43,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3"></div>
-                    <div class="col-3"></div>
-                    <div class="col-6 reMindFormTiles shadow d-flex mt-2 pt-1 pb-1" id="cancelAddListButtonsContainer">
-                        <a href="/lists" class="btn formLabel">Cancel</a>
-                        <button type="submit" id="addListButton" class="btn formLabel redButton ms-auto">Save</button>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6 col-10 reMindFormTiles shadow d-flex mt-2 pt-1 pb-1" id="cancelAddListButtonsContainer">
+                        <a href="/lists" class="btn formButton">Cancel</a>
+                        <button type="submit" id="addListButton" class="btn formButton blueButton ms-auto">Save</button>
                     </div>
+                    <div class="col-sm-3"></div>
                 </div>
             </form>
-            
             <div id="customItemGroupsModal" class="modal-container" hidden>
                 <div class="modal-panel customItemGroupModal p-3">
                     <header class="modalHeader">
@@ -62,36 +63,43 @@
                         </div>
                     </header>
                     <div class="pt-2 pb-0">
-                        <div class="container-fluid customItemGroupTable">
-                            <% for (let counter = 0; counter < customItemGroups.length-1; counter++) { %>
-                                <div class="row customItemGroupRow ms-0 me-0"  id="group<%=customItemGroups[counter].id%>">
-                                    <div class="col-3 customItemGroupTitle"><%=customItemGroups[counter].title%></div>
-                                    <div class="col-9 customItemGroupItems">
-                                        <% for (let itemCounter = 0; itemCounter < customItemGroups[counter].items.length-1; itemCounter++) { %>
-                                            <%= customItemGroups[counter].items[itemCounter][0] %>,&nbsp;
-                                        <% } if (customItemGroups[counter].items.length > 0) {%>
-                                            <%= customItemGroups[counter].items[customItemGroups[counter].items.length-1][0] %>
-                                        <% } %>
+                        <% if (passedCustomItemGroups.length > 0) { %>
+                            <div class="container-fluid customItemGroupTable">
+                        <% } else { %>
+                            <div class="container-fluid" id="noGroupsMessage">
+                                No custom groups have been created!
+                            </div>
+                            <div class="container-fluid customItemGroupTable" hidden>
+                        <% } %>
+                                <% for (let counter = 0; counter < passedCustomItemGroups.length-1; counter++) { %>
+                                    <div class="row customItemGroupRow ms-0 me-0"  id="group<%=passedCustomItemGroups[counter].groupID%>">
+                                        <div class="col-3 customItemGroupTitle"><%=passedCustomItemGroups[counter].title%></div>
+                                        <div class="col-9 customItemGroupItems">
+                                            <% for (let itemCounter = 0; itemCounter < passedCustomItemGroups[counter].items.length-1; itemCounter++) { %>
+                                                <%= passedCustomItemGroups[counter].items[itemCounter][0] %>,&nbsp;
+                                            <% } if (passedCustomItemGroups[counter].items.length > 0) {%>
+                                                <%= passedCustomItemGroups[counter].items[passedCustomItemGroups[counter].items.length-1][0] %>
+                                            <% } %>
+                                        </div>
                                     </div>
-                                </div>
-                            <% } if (customItemGroups.length > 0) {%>
-                                <div class="row customItemGroupLastRow ms-0 me-0" id="group<%=customItemGroups[customItemGroups.length-1].id%>">
-                                    <div class="col-3 customItemGroupTitle"><%=customItemGroups[customItemGroups.length-1].title%></div>
-                                    <div class="col-9 customItemGroupItems">
-                                        <% for (let itemCounter = 0; itemCounter < customItemGroups[customItemGroups.length-1].items.length-1; itemCounter++) { %>
-                                            <%= customItemGroups[customItemGroups.length-1].items[itemCounter][0] %>,&nbsp;
-                                        <% } if (customItemGroups[customItemGroups.length-1].items.length > 0) {%>
-                                            <%= customItemGroups[customItemGroups.length-1].items[customItemGroups[customItemGroups.length-1].items.length-1][0] %>
-                                        <% } %>
+                                <% } if (passedCustomItemGroups.length > 0) {%>
+                                    <div class="row customItemGroupLastRow ms-0 me-0" id="group<%=passedCustomItemGroups[passedCustomItemGroups.length-1].groupID%>">
+                                        <div class="col-3 customItemGroupTitle"><%=passedCustomItemGroups[passedCustomItemGroups.length-1].title%></div>
+                                        <div class="col-9 customItemGroupItems">
+                                            <% for (let itemCounter = 0; itemCounter < passedCustomItemGroups[passedCustomItemGroups.length-1].items.length-1; itemCounter++) { %>
+                                                <%= passedCustomItemGroups[passedCustomItemGroups.length-1].items[itemCounter][0] %>,&nbsp;
+                                            <% } if (passedCustomItemGroups[passedCustomItemGroups.length-1].items.length > 0) {%>
+                                                <%= passedCustomItemGroups[passedCustomItemGroups.length-1].items[passedCustomItemGroups[passedCustomItemGroups.length-1].items.length-1][0] %>
+                                            <% } %>
+                                        </div>
                                     </div>
-                                </div>
-                            <% } %>
-                        </div>
+                                <% } %>
+                            </div>
                         <div class="mt-0 container d-flex pe-0 rightAlignedLinkFlexContainer">
                             <p class="reMindLinks mb-0" id="createNewCustomGroup">+ Create New Group of Items</p>
-                        </div>
+                        </div>                     
                     </div>
-                    <a class="btn formLabel" id="customItemGroupsCancel">Cancel</a>
+                    <a class="btn formButton" id="customItemGroupsCancel">Cancel</a>
                 </div>
             </div>		
             
@@ -109,13 +117,13 @@
                         <div class="pb-0">
                             <div class="ps-2 pe-2">
                                 <label class="formLabel" for="groupName">Group Name</label>
-                                <input type="text" class="form-control" name="groupName" id="groupName" placeholder="Enter Group Name" required>
+                                <input type="text" class="form-control" name="groupName" id="groupName" placeholder="Enter Group Name" required maxlength="32">
                             </div>
                             <div class="mt-2 ps-2 pe-2" id="groupItems">
                                 <div class="container formListItem">
                                     <label class="formLabel" for="groupItem1">Enter Group Item 1:</label>
                                     <div class="groupItemRow">
-                                        <input type="text" class="form-control me-1" name="groupItem1" id="groupItem1" placeholder="Enter Group Item 1">
+                                        <input type="text" class="form-control me-1" name="groupItem1" id="groupItem1" placeholder="Enter Group Item 1" maxlength="200">
                                         <i class="bi bi-trash bootstrapIcon reMindLinks" name="groupDeleteIcon"></i>
                                     </div>
                                 </div>
@@ -127,15 +135,15 @@
                             </div>
                         </div>
                         <div class="d-flex mt-2 pt-1 pb-1" id="cancelAddListButtonsContainer">
-                            <a class="btn formLabel" id="newItemGroupCancel">Cancel</a>
-                            <button type="button" id="addNewItemGroup" class="btn formLabel redButton ms-auto">Save</button>
+                            <a class="btn formButton" id="newItemGroupCancel">Cancel</a>
+                            <button type="button" id="addNewItemGroup" class="btn formButton redButton ms-auto">Save</button>
                         </div>
                     </form>
                 </section>
             </div>
         </div>  
     <script>
-        let customItemGroups = <%- JSON.stringify(customItemGroups) %>;
+        let passedCustomItemGroups = <%- JSON.stringify(passedCustomItemGroups) %>;
     </script>
     <script src="/addListScript.js"></script>
     <script>

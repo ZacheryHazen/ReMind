@@ -6,50 +6,50 @@
         <title>Re-Mind - Lists</title>
     </head>
     <body class="reMindPage">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%- include('partials/navbar') %>
-        <div class="container-xxl container-fluid remindBodyText">
-            <div class="row justify-content-center">
-                <div class="col-12 mt-2">
-                    <h3 class="homePageAndListHeader mb-0">All Lists</h3>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-3">
+        <div class="container-fluid p-0 container-md remindBodyText">
+            <div class="row container m-0 p-0 justify-content-center">
+                <div class="col-sm-3 col-4 mx-sm-2 p-0">
 
-                    </div>
-                    <div class="col-3 ms-3">
-                        
-                    </div>
-                    <div class="col-3 alignTextEnd ms-3 me-1 addButton">
-                        <a href="lists/add" class="reMindLinks">+ Add List</a>
-                    </div>
-                    <% if (Object.keys(passedLists).length > 0) { %>
-                        <% for (let listCounter = 0; listCounter < Object.keys(passedLists).length; listCounter++) { %>
-                            <% if (listCounter % 3 == 0) { %>
-                                <div class="col-3 shadow mb-3 pt-1 pb-2 remindHomeTiles">
-                            <% } else { %>
-                                <div class="col-3 shadow ms-3 mb-3 pt-1 pb-2 remindHomeTiles">
-                            <% } %>
-                                <a href="/lists/<%-passedLists[listCounter].id%>" class="tileLink">
-                                    <h4 class="homePageAndListHeader">
-                                        <%= passedLists[listCounter].name %>
-                                    </h4>
-                                    <ul class="listItemUL">
-                                        <% for (let itemCounter = 0; itemCounter < 10 && itemCounter < Object.keys(passedLists[listCounter].items).length; itemCounter++) { %>
-                                            <% if (passedLists[listCounter].items[itemCounter][1] == true) {%>
-                                                <li class="checkedItem"><%= passedLists[listCounter].items[itemCounter][0] %></li>
-                                            <% } else {%>
-                                                <li><%= passedLists[listCounter].items[itemCounter][0] %></li>
-                                            <% } %>
-                                        <% } %>
-                                    </ul>
-                                    <% if (Object.keys(passedLists[listCounter].items).length > 10) { %>
-                                        And <%=passedLists[listCounter].items.length-10%> more item(s) not shown here.
-                                    <% } %>
-                                </a>
-                            </div> 
-                        <% } %>
-                    <% } %>
                 </div>
+                <div class="col-sm-3 col-4 mx-sm-2 mb-2 p-0">
+                    <h3 class="homePageAndListHeader mb-0 mt-2">All Lists</h3>
+                </div>
+                <div class="col-sm-3 col-4 alignTextEnd mx-sm-2 ms-sm-3 pe-1 p-sm-0 d-flex addButton">
+                    <a href="lists/add" class="reMindLinks addLink">+ Add List</a>
+                </div>
+                <% if (Object.keys(passedLists).length > 0) { %>
+                    <% for (let listCounter = 0; listCounter < Object.keys(passedLists).length; listCounter++) { %>
+                        <% if (listCounter % 3 == 0) { %>
+                            <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 mx-2 remindHomeTiles tileLink">
+                        <% } else { %>
+                            <div class="col-5 col-sm-3 shadow mb-3 pt-1 pb-2 mx-2 ms-sm-3 remindHomeTiles tileLink">
+                        <% } %>
+                            <a href="/lists/<%-passedLists[listCounter].listID%>" class="tileLink">
+                                <h4 class="homePageAndListHeader">
+                                    <%= passedLists[listCounter].name %>
+                                </h4>
+                                <ul class="listItemUL ps-lg-4 ps-3">
+                                    <% for (let itemCounter = 0; itemCounter < 10 && itemCounter < Object.keys(passedLists[listCounter].items).length; itemCounter++) { %>
+                                        <% if (passedLists[listCounter].items[itemCounter][1] == true) {%>
+                                            <li class="checkedItem"><%= passedLists[listCounter].items[itemCounter][0] %></li>
+                                        <% } else {%>
+                                            <li><%= passedLists[listCounter].items[itemCounter][0] %></li>
+                                        <% } %>
+                                    <% } %>
+                                </ul>
+                                <% if (Object.keys(passedLists[listCounter].items).length > 10) { %>
+                                    And <%=passedLists[listCounter].items.length-10%> more item(s) not shown here.
+                                <% } %>
+                            </a>
+                    </div> 
+                    <% } %>
+                <% } else { %>
+                    <div class="centerText">
+                        No lists have been added yet!
+                    </div>
+                <% } %>
             </div>
         </div>
         <script>

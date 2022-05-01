@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Work+Sans:wght@300;400;600&display=swap');
 
-.reMindNavbar
+.reMindNavbar, .signInBody
 {
     background-color: #25364B;
+    width: 100vw;
+}
+
+.signInBody
+{
+    background-color: #25364B;
+    width: 100vw;
+    height: 100vh;
 }
 
 .reMindBrand
@@ -11,10 +19,22 @@
     font-weight: 600;
     color: rgb(146, 146, 146);
 }
+
+.signInNavItems
+{
+    justify-content: end;
+}
+
 .reMindBodyText
 {
     font-family: 'Work Sans', sans-serif;
     font-weight: 300;
+}
+
+.statisticsText
+{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;   
 }
 
 .reMindInteractable
@@ -23,12 +43,12 @@
     font-weight: 400;
 }
 
-.remindNavLink
+.remindNavLink, .formLabel, .formButton, .signInLink, .grayButton:hover
 {
     color: rgb(168, 168, 168);
 }
 
-.reMindActiveNavLink
+.reMindActiveNavLink, .reMindNavLink:hover, .signInLink:hover, .formButton:hover
 {
     color: rgb(129, 129, 129);
 }
@@ -43,9 +63,10 @@
     outline: 1px solid rgb(230, 230, 230);
     background-color: white;
     align-self: flex-start;
+    overflow-wrap: break-word;
 }
 
-.remindHomeTiles:hover
+.remindHomeTiles:hover, .reMindPage
 {
     background-color: rgb(230, 230, 230);
 }
@@ -58,16 +79,6 @@
 {
     --bs-gutter-x: 0;
     height: 100vh;
-}
-
-.signInBody
-{
-    background-color: #25364b;
-}
-
-.formLabel
-{
-    color: rgb(168,168,168);
 }
 
 .reMindFormTiles
@@ -96,7 +107,7 @@
 
 .signInNav
 {
-    height:35vh;
+    height:33vh;
     padding-top:0.5rem;
 }
 
@@ -110,11 +121,6 @@
     text-align: center;
     font-family: 'Work Sans', sans-serif;
     font-weight: 600;
-}
-
-.reMindPage
-{
-    background-color: rgb(230, 230, 230);
 }
 
 .reMindPanel
@@ -142,7 +148,7 @@
 
 .listItemUL
 {
-    margin-bottom: 0;
+    margin-bottom: 0
 }
 
 .tileLink
@@ -159,6 +165,13 @@
 .addButton
 {
     padding-right: 0;
+    text-align: end;
+    justify-content: right;
+}
+
+.addLink
+{
+    align-self: end;
 }
 
 .bootstrapIcon
@@ -167,13 +180,8 @@
     align-self: center;
 }
 
-.bootstrapIcon:hover{
+.bootstrapIcon:hover, .addListItemLink:hover, .addListGroupItemLink:hover {
     cursor: pointer;
-}
-
-.addListItemLink:hover, .addListGroupItemLink:hover
-{
-    cursor: pointer
 }
 
 .addItemsContainer
@@ -200,12 +208,7 @@
     color: black;
 }
 
-.grayButton:hover
-{
-    color: rgb(168, 168, 168);
-}
-
-.fullWidth
+.fullWidth, #signInButton
 {
     width: 100%;
 }
@@ -293,12 +296,12 @@
 .customItemGroupTitle, .statisticHeader
 {
     border-right: 1px solid rgb(220, 220, 220);
-    word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .customItemGroupItems, .statisticRating
 {
-    word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .rightAlignedLinkFlexContainer
@@ -309,7 +312,6 @@
 
 .modal-container {
     position: fixed;
-    width: 100%;
     background-color: rgba(129, 129, 129, .6);
     z-index: 500;
     width: 100%;
@@ -321,11 +323,6 @@
     display: flex;
     align-items: top;
     justify-content: center;
-
-    /*
-    flex-wrap: wrap;
-    transition: all 0.2s ease-in-out;
-    */
 }
 
 .modal-panel
@@ -353,14 +350,9 @@
     display: none!important;    
 }
 
-#signInButton
+.starsContainer
 {
-    width: 100%;
-}
-
-#addListButton
-{
-    width: 15%;
+    flex-direction: row;
 }
 
 #reminderDescription, .reviewDescription
@@ -395,12 +387,83 @@
     {
         display: none;
     }
+    .reMindBodyText
+    {
+        font-size: 12pt;
+    }
+    .statisticsText
+    {
+        font-size: 10pt;
+    }
+    h3
+    {
+        font-size: 20pt;
+    }
+    h4
+    {
+        font-size: 18pt;
+    }
+    h5
+    {
+        font-size: 14pt;
+    }
+    .reMindBrand
+    {
+        display: none;
+    }
+    .remindNavLink
+    {
+        font-size: 9pt;
+    }
+    .modal-panel
+    {
+        width: 80%;
+    }
+    input[type=checkbox].form-check-input
+    {
+        width: 1.5em;
+    }
+    .datePicker, .timePicker
+    {
+        width: 75%;
+    }
+    .frequencySelect
+    {
+        align-self: center;
+        width: 50%;
+        height: 10%;
+    }
+    .starsContainer
+    {
+        align-items: center;
+    }
+    #otherNameInput
+    {
+        align-self: center;
+        width: 80%;
+        height: 2.5rem;
+    }
+    #dayDatePicker, #reminderDatePicker, #otherDatePicker
+    {
+        align-self: center;
+        width: 115%;
+        height: 2.5rem;
+    }
+    #chooseReminderHeader
+    {
+        font-size: 12pt;
+    }
+    #chooseReminderBackButton
+    {
+        align-self: center;
+    }
+    .signInNavItems
+    {
+        justify-content: space-between;
+    }
 }
 
 @media (min-width: 576px)
 {
-    .customItemGroupModal
-    {
-        max-width: 50%;
-    }
+    
 }
