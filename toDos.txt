@@ -19,8 +19,8 @@ Functionality to Implement:
 ---User Authentication (1/2 day)
 ---Make Things Responsive (? days)
 ---Comment JavaScript files
-Make ReadMe	
-Create advertisement
+---Make ReadMe	
+---Create advertisement
 ---Make Notification not open new page
 +++Make notifications work on phone
 ---Delete Review
@@ -34,8 +34,8 @@ Create advertisement
 
 Server Admin:
 sa
-RePassMind2022	
-			
+pass
+
 Future Things:
 Notifications on phones
 Mobile App
