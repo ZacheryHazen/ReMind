@@ -39,8 +39,8 @@ app.use(session({
 }));
 // This is the config used to connect to the SQL server, and it uses a dummy account created for SQL server access that was created in the ReadMe. The server name and port should also be explained in the ReadMe.
 var config = {
-    user: 'MyUser',
-    password: 'pass@123',
+    user: 'sa',
+    password: 'pass',
     database: 'reMind',
     server: hostName + '\\REMINDDB',
     port: 1443,
